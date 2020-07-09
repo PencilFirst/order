@@ -1,0 +1,1 @@
+<view class="content"><my-header vue-id="8dd740cc-1" seller="{{seller}}" bind:__l="__l"></my-header>首页</view>
