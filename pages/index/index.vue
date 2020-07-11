@@ -1,7 +1,6 @@
 <template>
 	<view class="content">
-		<my-header :seller=seller></my-header>
-		首页
+		<my-header :seller='seller'></my-header>
 	</view>
 </template>
 
@@ -11,16 +10,20 @@
 		data() {
 			return {
 				// title: 'Hello',
-				seller: {
-					title: "品香粥铺"
-				}
+				seller: {}
 			}
 		},
 		onLoad() {
-
+			this.getHeaderInfo()
 		},
 		methods: {
-
+			async getHeaderInfo() {
+				const res = await this.$http({
+					url: '/api/seller'
+				})
+				console.log(res.data.data)
+				this.seller = res.data.data
+			}
 		},
 		components: {
 			"my-header": Header
@@ -29,10 +32,7 @@
 </script>
 
 <style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+	my-header {
+		height: 200rpx;
 	}
 </style>

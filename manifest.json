@@ -72,7 +72,33 @@
     "mp-toutiao" : {
         "usingComponents" : true
     },
-    "uniStatistics": {  
-        "enable": false
+    "uniStatistics" : {
+        "enable" : false
+    },
+    "h5" : {
+        "devServer" : {
+            "port" : "",
+            "https" : false,
+            "proxy" : {
+                "/api" : {
+                    "target" : "http://ustbhuangyi.com/sell/api",
+                    "changeOrigin" : true,
+                    "pathRewrite" : {
+                        "^/api" : "/"
+                    }
+                }
+            }
+        },
+        "sdkConfigs" : {
+            "maps" : {}
+        },
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : false
+            }
+        },
+        "router" : {
+            "mode" : "history"
+        }
     }
 }
