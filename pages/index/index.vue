@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<my-header :seller='seller'></my-header>
+		<my-header :seller="seller"></my-header>
 	</view>
 </template>
 
@@ -33,6 +33,6 @@
 
 <style>
 	my-header {
-		height: 200rpx;
+		height: 750rpx;
 	}
 </style>

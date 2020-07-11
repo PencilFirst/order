@@ -37,7 +37,8 @@
 						<text class="name">{{seller.name}}</text>
 						<view class="star-wrapper">
 							<!-- 评分组件 -->
-							五星好评★★★★★
+							<star :size="48" :score="seller.score"></star>
+							<!-- 五星好评★★★★★ -->
 						</view>
 						<view class="title">
 							<view class="line"></view>
@@ -69,6 +70,7 @@
 </template>
 
 <script>
+	import star from'../star/star.vue'
 	export default {
 		name: "myHeader",
 		props: {
@@ -117,6 +119,9 @@
 		},
 		onUnload() {
 			this.animationData = {}
+		},
+		components:{
+			star
 		}
 	}
 </script>
