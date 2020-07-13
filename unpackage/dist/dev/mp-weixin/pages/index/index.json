@@ -1,6 +1,8 @@
 {
   "navigationBarTitleText": "点餐",
   "usingComponents": {
-    "my-header": "/components/header/header"
+    "uni-segmented-control": "/components/uni-segmented-control/uni-segmented-control",
+    "my-header": "/components/header/header",
+    "my-goods": "/components/goods/goods"
   }
 }

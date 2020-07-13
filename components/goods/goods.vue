@@ -1,9 +1,7 @@
 <template>
 	<view class="goods">
-		<scroll-view class="menu-wrapper" id="menuWarpper" scroll-y="true" 
-		scroll-with-animation="true" :scroll-top="scrollTop">
-			<view class="menu-item" v-for="(item,index) in goods"  @tap="foodTo(index)"
-			:key="index" :class="{'current':currentIndex === index}">
+		<scroll-view class="menu-wrapper" id="menuWarpper" scroll-y="true" scroll-with-animation="true" :scroll-top="scrollTop">
+			<view class="menu-item" v-for="(item,index) in goods" @tap="foodTo(index)" :key="index" :class="{'current':currentIndex === index}">
 				<text class="text border-1px">
 					<text class="icon" v-show="item.type>0" :class="classMap[item.type]"></text>
 					{{item.name}}
@@ -20,7 +18,7 @@
 					</view>
 					<view class="content">
 						<text class="name">{{food.name}}</text>
-						<text class="description">{{food.description}}</text>
+						<view class="desc">{{food.description}}</view>
 						<view class="extra">
 							<text class="count">月售{{food.sellCount}}份</text>
 							<text>好评率{{food.rating}}%</text>
@@ -57,7 +55,8 @@
 				selectedFood: {},
 				foodView: 'food3',
 				scrollTop: 0,
-				foodTop:0
+				foodTop: 0,
+				height: []
 			};
 		},
 		created() {
@@ -66,7 +65,7 @@
 
 		},
 		mounted() {
-			// this.calculateHeight()
+			
 
 		},
 		computed: {
@@ -78,7 +77,7 @@
 					if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
 						// this._followScroll(i);
 						// this.foodView = 'food' + i
-						switch(i){
+						switch (i) {
 							case 3:
 								_this.scrollTop = 0
 								break;
@@ -86,7 +85,6 @@
 								_this.scrollTop = 200
 								break;
 						}
-						// if(i<this.listHeight.length-3) this.scrollTop = 0
 						return i;
 					}
 				}
@@ -114,26 +112,24 @@
 				this.$nextTick(() => {
 					const query = uni.createSelectorQuery()
 					query.selectAll('#foodList').boundingClientRect(data => {
-						console.log(data)
+						console.log(data[8])
 						data.forEach(item => {
-							this.listHeight.length > 0 ? this.listHeight.push(Math.ceil(item.top) - 230) : this.listHeight
-								.push(0)
+							this.height.push(Math.ceil(item.top))
 						})
+						this.height.forEach(item => {
+							this.listHeight.push(item - this.height[0])
+						})
+						this.listHeight[this.goods.length] = this.height[this.goods.length - 1] + data[this.goods.length - 1].height
+						console.log(res)
 					}).exec()
 				})
 			},
-			// calculateHeight() {
-			// 	const query = uni.createSelectorQuery().in(this)
-			// 	query.selectAll('#foodList').boundingClientRect(data => {
-			// 		console.log(data)
-			// 	})
-			// }
 			foodScroll(e) {
 				// console.log(e)
 				this.scrollY = e.detail.scrollTop
 			},
-			foodTo(index){
-				this.foodTop = this.listHeight[index]
+			foodTo(index) {
+				this.foodTop = this.listHeight[index] + 1
 			}
 		},
 		components: {
@@ -147,7 +143,8 @@
 		display: flex;
 		position: absolute;
 		top: 350rpx;
-		bottom: 52rpx;
+		/* bottom: 52rpx; */
+		bottom: 0;
 		width: 100%;
 		overflow: hidden;
 	}
@@ -234,6 +231,7 @@
 
 	.goods .foods-wrapper {
 		flex: 1;
+		background-color: #fff;
 	}
 
 	.goods .foods-wrapper .title {
@@ -244,6 +242,8 @@
 		font-size: 24rpx;
 		color: rgba(147, 153, 159);
 		background-color: #f3f5f7;
+		display: inline-block;
+		width: 100%;
 	}
 
 	.goods .foods-wrapper .food-item {
@@ -251,6 +251,7 @@
 		margin: 36rpx;
 		padding-bottom: 36rpx;
 		position: relative;
+
 	}
 
 	.goods .foods-wrapper .food-item::after {

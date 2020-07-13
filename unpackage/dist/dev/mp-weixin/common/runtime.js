@@ -104,11 +104,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/header/header":1};
+/******/ 		var cssChunks = {"components/goods/goods":1,"components/header/header":1,"components/uni-segmented-control/uni-segmented-control":1,"components/star/star":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/header/header":"components/header/header"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/goods/goods":"components/goods/goods","components/header/header":"components/header/header","components/uni-segmented-control/uni-segmented-control":"components/uni-segmented-control/uni-segmented-control","components/star/star":"components/star/star"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

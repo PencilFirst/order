@@ -1,0 +1,1 @@
+<view class="{{['star',starType]}}"><block wx:for="{{itemClasses}}" wx:for-item="itemClass" wx:for-index="index" wx:key="index"><text class="{{['star-item',itemClass]}}"></text></block></view>
