@@ -29,7 +29,8 @@
 						</view>
 						<view class="cartcontrol-wrapper">
 							<!-- 购物车控件组件 -->
-							购物车控件
+							<cartcontrol></cartcontrol>
+							<!-- 购物车控件 -->
 						</view>
 					</view>
 				</view>
@@ -41,6 +42,7 @@
 </template>
 
 <script>
+	import cartControl from '../cartcontrol.vue'
 	export default {
 		props: {
 			seller: {
@@ -65,7 +67,7 @@
 
 		},
 		mounted() {
-			
+
 
 		},
 		computed: {
@@ -133,7 +135,7 @@
 			}
 		},
 		components: {
-
+			"cartcontrol": cartControl
 		}
 	}
 </script>
@@ -177,7 +179,7 @@
 	}
 
 	.goods .menu-wrapper .menu-item .text::after {
-		display: none;
+		/* display: none; */
 	}
 
 	.goods .menu-wrapper .menu-item .text .icon {
@@ -226,7 +228,7 @@
 		left: 0;
 		bottom: 0;
 		width: 100%;
-		border-top: 2rpx soild rgba(7, 17, 27, .1);
+		border-top: 2rpx solid rgba(7, 17, 27, 0.1);
 	}
 
 	.goods .foods-wrapper {
@@ -261,7 +263,7 @@
 		left: 0;
 		bottom: 0;
 		width: 100%;
-		border-top: 2rpx soild rgba(7, 17, 27, .1);
+		border-top: 2rpx solid rgba(7, 17, 27, .1);
 	}
 
 	.goods .foods-wrapper .food-item:last-child {
