@@ -39,7 +39,8 @@
 				<split></split>
 				<view class="rating">
 					<text class="title">商品评价</text>
-					<!-- <ratingselect></ratingselect> -->
+					<ratingselect :selectType="selectType" :onlyContent="onlyContent" :desc="desc" :ratings="food.ratings" @select="selectRating"
+					 @toggle="toggleContent"></ratingselect>
 					<view class="rating-wrapper">
 						<view v-show="food.ratings && food.ratings.length">
 							<view class="rating-item border-1px" v-show="needShow(rating.rateType,rating.text)" v-for="rating in food.ratings">
@@ -73,6 +74,7 @@
 	} from '../../util/date.js'
 	import cartControl from '../cartcontrol/cartcontrol.vue'
 	import split from '../split/split.vue'
+	import ratingselect from '../ratingselect/ratingselect.vue'
 
 	const ALL = 2;
 
@@ -125,6 +127,12 @@
 			addFirst() {
 				this.$set(this.food, 'count', 1);
 			},
+			selectRating(type) {
+				this.selectType = type;
+			},
+			toggleContent() {
+				this.onlyContent = !this.onlyContent;
+			}
 		},
 		filters: {
 			formatDate(time) {
@@ -134,7 +142,8 @@
 		},
 		components: {
 			"cartcontrol": cartControl,
-			"split": split
+			"split": split,
+			"ratingselect": ratingselect
 		}
 	}
 </script>
@@ -278,7 +287,7 @@
 
 	.food .rating {
 		padding-top: 36rpx;
-		padding-bottom:36rpx;
+		padding-bottom: 36rpx;
 	}
 
 	.food .rating .title {
@@ -300,6 +309,7 @@
 	.food .rating-wrapper .rating-item::after {
 		content: '';
 		display: block;
+		position: absolute;
 		left: 0;
 		bottom: 0;
 		width: 100%;
