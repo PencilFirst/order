@@ -1,50 +1,54 @@
 <template>
-	<view class="goods">
-		<scroll-view class="menu-wrapper" id="menuWarpper" scroll-y="true" scroll-with-animation="true" :scroll-top="scrollTop">
-			<view class="menu-item" v-for="(item,index) in goods" @tap="foodTo(index)" :key="index" :class="{'current':currentIndex === index}">
-				<text class="text border-1px">
-					<text class="icon" v-show="item.type>0" :class="classMap[item.type]"></text>
-					{{item.name}}
-				</text>
-			</view>
-		</scroll-view>
-		<scroll-view class="foods-wrapper" id="foodsWrapper"  scroll-y="true"
-		 scroll-with-animation="true" @scroll="foodScroll" :scroll-top="foodTop">
-			<view class="food-list" id="foodList" v-for="(item,index) in goods" :key="index">
-				<text class="title" :id="'food'+index">{{item.name}}</text>
-				<view class="food-item border-1px" v-for="(food,index) in item.foods" :key="index">
-					<view class="icon">
-						<image :src="food.icon" mode="widthFix"></image>
-					</view>
-					<view class="content">
-						<text class="name">{{food.name}}</text>
-						<view class="desc">{{food.description}}</view>
-						<view class="extra">
-							<text class="count">月售{{food.sellCount}}份</text>
-							<text>好评率{{food.rating}}%</text>
+	<view>
+		<view class="goods">
+			<scroll-view class="menu-wrapper" id="menuWarpper" scroll-y="true" scroll-with-animation="true" :scroll-top="scrollTop">
+				<view class="menu-item" v-for="(item,index) in goods" @tap="foodTo(index)" :key="index" :class="{'current':currentIndex === index}">
+					<text class="text border-1px">
+						<text class="icon" v-show="item.type>0" :class="classMap[item.type]"></text>
+						{{item.name}}
+					</text>
+				</view>
+			</scroll-view>
+			<scroll-view class="foods-wrapper" id="foodsWrapper" scroll-y="true" scroll-with-animation="true" @scroll="foodScroll"
+			 :scroll-top="foodTop">
+				<view class="food-list" id="foodList" v-for="(item,index) in goods" :key="index">
+					<text class="title" :id="'food'+index">{{item.name}}</text>
+					<view class="food-item border-1px" v-for="(food,index) in item.foods" :key="index" @tap="selectFood(food)">
+						<view class="icon">
+							<image :src="food.icon" mode="widthFix"></image>
 						</view>
-						<view class="price">
-							<text class="now">￥{{food.price}}</text>
-							<text class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</text>
-						</view>
-						<view class="cartcontrol-wrapper">
-							<!-- 购物车控件组件 -->
-							<cartcontrol :food="food"></cartcontrol>
-							<!-- 购物车控件 -->
+						<view class="content">
+							<text class="name">{{food.name}}</text>
+							<view class="desc">{{food.description}}</view>
+							<view class="extra">
+								<text class="count">月售{{food.sellCount}}份</text>
+								<text>好评率{{food.rating}}%</text>
+							</view>
+							<view class="price">
+								<text class="now">￥{{food.price}}</text>
+								<text class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</text>
+							</view>
+							<view class="cartcontrol-wrapper">
+								<!-- 购物车控件组件 -->
+								<cartcontrol :food="food"></cartcontrol>
+								<!-- 购物车控件 -->
+							</view>
 						</view>
 					</view>
 				</view>
-			</view>
-		</scroll-view>
-		<!-- shopcart组件 -->
-		<shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice" :selectFoods="selectFoods"></shopcart>
+			</scroll-view>
+			<!-- shopcart组件 -->
+			<shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice" :selectFoods="selectFoods"></shopcart>
+		</view>
+		<!-- food组件 -->
+		<food :food="selectedFood" ref="food"></food>
 	</view>
-	<!-- food组件 -->
 </template>
 
 <script>
 	import cartControl from '../cartcontrol/cartcontrol.vue'
 	import shopCart from '../shopcart/shopcart.vue'
+	import food from '../food/food.vue'
 	export default {
 		props: {
 			seller: {
@@ -138,10 +142,15 @@
 				// this._drop(target);
 				console.log('11')
 			},
+			selectFood(food) {
+				this.selectedFood = food;
+				this.$refs.food.show();
+			}
 		},
 		components: {
 			"cartcontrol": cartControl,
-			"shopcart": shopCart
+			"shopcart": shopCart,
+			"food": food
 		}
 	}
 </script>
