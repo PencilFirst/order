@@ -31,12 +31,12 @@
 						</view>
 					</view>
 				</view>
-				<!-- <split></split> -->
+				<split v-show="food.info"></split>
 				<view class="info" v-show="food.info">
 					<view class="title">商品信息</view>
 					<text class="text">{{food.info}}</text>
 				</view>
-				<!-- <split></split> -->
+				<split></split>
 				<view class="rating">
 					<text class="title">商品评价</text>
 					<!-- <ratingselect></ratingselect> -->
@@ -72,6 +72,7 @@
 		formatDate
 	} from '../../util/date.js'
 	import cartControl from '../cartcontrol/cartcontrol.vue'
+	import split from '../split/split.vue'
 
 	const ALL = 2;
 
@@ -132,7 +133,8 @@
 			}
 		},
 		components: {
-			"cartcontrol": cartControl
+			"cartcontrol": cartControl,
+			"split": split
 		}
 	}
 </script>
@@ -275,7 +277,8 @@
 	}
 
 	.food .rating {
-		padding-top: 36rpx
+		padding-top: 36rpx;
+		padding-bottom:36rpx;
 	}
 
 	.food .rating .title {
@@ -320,6 +323,7 @@
 	}
 
 	.food .rating-wrapper .rating-item .user .avatar {
+		display: inline-block;
 		width: 24rpx;
 		height: 24rpx;
 		border-radius: 50%;
