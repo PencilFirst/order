@@ -76,7 +76,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  cartcontrol: function() {
+    return __webpack_require__.e(/*! import() | components/cartcontrol/cartcontrol */ "components/cartcontrol/cartcontrol").then(__webpack_require__.bind(null, /*! @/components/cartcontrol/cartcontrol.vue */ 58))
+  },
+  shopcart: function() {
+    return __webpack_require__.e(/*! import() | components/shopcart/shopcart */ "components/shopcart/shopcart").then(__webpack_require__.bind(null, /*! @/components/shopcart/shopcart.vue */ 65))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -114,51 +121,53 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var cartControl = function cartControl() {__webpack_require__.e(/*! require.ensure | components/cartcontrol/cartcontrol */ "components/cartcontrol/cartcontrol").then((function () {return resolve(__webpack_require__(/*! ../cartcontrol/cartcontrol.vue */ 58));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var shopCart = function shopCart() {__webpack_require__.e(/*! require.ensure | components/shopcart/shopcart */ "components/shopcart/shopcart").then((function () {return resolve(__webpack_require__(/*! ../shopcart/shopcart.vue */ 65));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   props: {
     seller: {
@@ -173,7 +182,8 @@ var _default =
       selectedFood: {},
       foodView: 'food3',
       scrollTop: 0,
-      foodTop: 0 };
+      foodTop: 0,
+      height: [] };
 
   },
   created: function created() {
@@ -182,7 +192,7 @@ var _default =
 
   },
   mounted: function mounted() {
-    // this.calculateHeight()
+
 
   },
   computed: {
@@ -202,7 +212,6 @@ var _default =
               _this.scrollTop = 200;
               break;}
 
-          // if(i<this.listHeight.length-3) this.scrollTop = 0
           return i;
         }
       }
@@ -230,29 +239,29 @@ var _default =
                 _this2.$nextTick(function () {
                   var query = uni.createSelectorQuery();
                   query.selectAll('#foodList').boundingClientRect(function (data) {
-                    console.log(data);
+                    console.log(data[8]);
                     data.forEach(function (item) {
-                      _this2.listHeight.length > 0 ? _this2.listHeight.push(Math.ceil(item.top) - 230) : _this2.listHeight.
-                      push(0);
+                      _this2.height.push(Math.ceil(item.top));
                     });
+                    _this2.height.forEach(function (item) {
+                      _this2.listHeight.push(item - _this2.height[0]);
+                    });
+                    _this2.listHeight[_this2.goods.length] = _this2.height[_this2.goods.length - 1] + data[_this2.goods.length - 1].height;
+                    console.log(res);
                   }).exec();
                 });case 5:case "end":return _context.stop();}}}, _callee);}))();
     },
-    // calculateHeight() {
-    // 	const query = uni.createSelectorQuery().in(this)
-    // 	query.selectAll('#foodList').boundingClientRect(data => {
-    // 		console.log(data)
-    // 	})
-    // }
     foodScroll: function foodScroll(e) {
       // console.log(e)
       this.scrollY = e.detail.scrollTop;
     },
     foodTo: function foodTo(index) {
-      this.foodTop = this.listHeight[index];
+      this.foodTop = this.listHeight[index] + 1;
     } },
 
-  components: {} };exports.default = _default;
+  components: {
+    "cartcontrol": cartControl,
+    "shopcart": shopCart } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

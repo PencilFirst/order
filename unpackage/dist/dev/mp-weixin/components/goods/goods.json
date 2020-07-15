@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
-  "component": true
+  "component": true,
+  "usingComponents": {
+    "cartcontrol": "/components/cartcontrol/cartcontrol",
+    "shopcart": "/components/shopcart/shopcart"
+  }
 }

@@ -8,7 +8,7 @@
 				</text>
 			</view>
 		</scroll-view>
-		<scroll-view class="foods-wrapper" id="foodsWrapper" :scroll-into-view="foodView" scroll-y="true"
+		<scroll-view class="foods-wrapper" id="foodsWrapper"  scroll-y="true"
 		 scroll-with-animation="true" @scroll="foodScroll" :scroll-top="foodTop">
 			<view class="food-list" id="foodList" v-for="(item,index) in goods" :key="index">
 				<text class="title" :id="'food'+index">{{item.name}}</text>
@@ -29,7 +29,7 @@
 						</view>
 						<view class="cartcontrol-wrapper">
 							<!-- 购物车控件组件 -->
-							<cartcontrol></cartcontrol>
+							<cartcontrol :food="food"></cartcontrol>
 							<!-- 购物车控件 -->
 						</view>
 					</view>
@@ -37,12 +37,14 @@
 			</view>
 		</scroll-view>
 		<!-- shopcart组件 -->
+		<shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice" :selectFoods="selectFoods"></shopcart>
 	</view>
 	<!-- food组件 -->
 </template>
 
 <script>
-	import cartControl from '../cartcontrol.vue'
+	import cartControl from '../cartcontrol/cartcontrol.vue'
+	import shopCart from '../shopcart/shopcart.vue'
 	export default {
 		props: {
 			seller: {
@@ -55,7 +57,6 @@
 				listHeight: [],
 				scrollY: 0,
 				selectedFood: {},
-				foodView: 'food3',
 				scrollTop: 0,
 				foodTop: 0,
 				height: []
@@ -102,7 +103,7 @@
 					});
 				});
 				return foods;
-			}
+			},
 		},
 		methods: {
 			async getGoodsInfo() {
@@ -132,10 +133,15 @@
 			},
 			foodTo(index) {
 				this.foodTop = this.listHeight[index] + 1
-			}
+			},
+			addFood(target) {
+				// this._drop(target);
+				console.log('11')
+			},
 		},
 		components: {
-			"cartcontrol": cartControl
+			"cartcontrol": cartControl,
+			"shopcart": shopCart
 		}
 	}
 </script>
@@ -145,8 +151,8 @@
 		display: flex;
 		position: absolute;
 		top: 350rpx;
-		/* bottom: 52rpx; */
-		bottom: 0;
+		bottom: 90rpx;
+		/* bottom: 0; */
 		width: 100%;
 		overflow: hidden;
 	}

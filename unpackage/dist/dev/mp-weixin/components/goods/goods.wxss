@@ -5,7 +5,8 @@
 	display: flex;
 	position: absolute;
 	top: 350rpx;
-	bottom: 52rpx;
+	bottom: 90rpx;
+	/* bottom: 0; */
 	width: 100%;
 	overflow: hidden;
 }
@@ -36,7 +37,7 @@
 	font-weight: 700;
 }
 .goods .menu-wrapper .menu-item .text::after {
-	display: none;
+	/* display: none; */
 }
 .goods .menu-wrapper .menu-item .text .icon {
 	display: inline-block;
@@ -78,12 +79,13 @@
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	border-top: 2rpx soild rgba(7, 17, 27, .1);
+	border-top: 2rpx solid rgba(7, 17, 27, 0.1);
 }
 .goods .foods-wrapper {
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
 	        flex: 1;
+	background-color: #fff;
 }
 .goods .foods-wrapper .title {
 	padding-left: 24rpx;
@@ -93,6 +95,8 @@
 	font-size: 24rpx;
 	color: rgba(147, 153, 159);
 	background-color: #f3f5f7;
+	display: inline-block;
+	width: 100%;
 }
 .goods .foods-wrapper .food-item {
 	display: -webkit-box;
@@ -109,7 +113,7 @@
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	border-top: 2rpx soild rgba(7, 17, 27, .1);
+	border-top: 2rpx solid rgba(7, 17, 27, .1);
 }
 .goods .foods-wrapper .food-item:last-child {
 	margin-bottom: 0;

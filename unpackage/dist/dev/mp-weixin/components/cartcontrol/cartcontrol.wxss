@@ -1,0 +1,44 @@
+
+.cartcontrol {
+	font-size: 0;
+}
+.cartcontrol .animation {
+	display: inline-block;
+}
+.cartcontrol .cart-decrease {
+	display: inline-block;
+	padding: 12rpx;
+	opacity: 1;
+	-webkit-transform: translate3d(24px, 0, 0);
+	        transform: translate3d(24px, 0, 0);
+}
+.cartcontrol .cart-decrease .inner {
+	display: inline-block;
+	line-height: 48rpx;
+	font-size: 48rpx;
+	color: rgb(0, 160, 220);
+	-webkit-transition: all 0.4s linear;
+	transition: all 0.4s linear;
+	-webkit-transform: rotate(0);
+	        transform: rotate(0);
+}
+
+/* 动画 */
+.cartcontrol .cart-count {
+	display: inline-block;
+	vertical-align: top;
+	width: 24rpx;
+	padding-top: 12rpx;
+	line-height: 48rpx;
+	font-size: 20rpx;
+	text-align: center;
+	color: rgb(147, 153, 159);
+}
+.cartcontrol .cart-add {
+	display: inline-block;
+	padding: 12rpx;
+	line-height: 48rpx;
+	font-size: 48rpx;
+	color: rgb(0, 160, 220);
+}
+

@@ -1,0 +1,210 @@
+
+.shopcart {
+	position: fixed;
+	bottom: 90rpx;
+	left: 0;
+	z-index: 50;
+	width: 100%;
+	height: 96rpx;
+	/* background-color: #007AFF; */
+}
+.shopcart .content {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	background-color: #141d27;
+	font-size: 0;
+	color: rgba(255, 255, 255, .4);
+}
+.shopcart .content .content-left {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+}
+.shopcart .content .content-left .logo-wrapper {
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	top: -20rpx;
+	margin: 0 24rpx;
+	padding: 12rpx;
+	width: 112rpx;
+	height: 112rpx;
+	box-sizing: border-box;
+	border-radius: 50%;
+	background-color: #141d27;
+}
+.shopcart .content .content-left .logo-wrapper .logo {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	text-align: center;
+	background-color: #2b343c;
+}
+.shopcart .content .content-left .logo-wrapper .logo.highlight {
+	background-color: rgb(0, 160, 220);
+}
+.shopcart .content .content-left .logo-wrapper .logo .icon-shopping_cart {
+	line-height: 88rpx;
+	font-size: 48rpx;
+	color: #80858a;
+}
+.shopcart .content .content-left .logo-wrapper .logo .icon-shopping_cart.highlight {
+	color: #FFFFFF;
+}
+.shopcart .content .content-left .logo-wrapper .num {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 48rpx;
+	height: 32rpx;
+	line-height: 32rpx;
+	text-align: center;
+	border-radius: 32rpx;
+	font-size: 18rpx;
+	font-size: 700;
+	color: #fff;
+	background-color: rgb(240, 20, 20);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+}
+.shopcart .content .content-left .price {
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 24rpx;
+	line-height: 48rpx;
+	padding-right: 24rpx;
+	box-sizing: border-box;
+	border-right: 1px solid rgba(255, 255, 255, 0.1);
+	font-size: 32rpx;
+	font-weight: 700;
+}
+.shopcart .content .content-left .price.highlight {
+	color: #FFFFFF;
+}
+.shopcart .content .content-left .desc {
+	display: inline-block;
+	vertical-align: top;
+	margin: 24rpx 0 0 24rpx;
+	line-height: 48rpx;
+	font-size: 20rpx;
+}
+.shopcart .content .content-right {
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 0 210rpx;
+	        flex: 0 0 210rpx;
+	width: 210rpx;
+}
+.shopcart .content .content-right .pay {
+	height: 96rpx;
+	line-height: 96rpx;
+	text-align: center;
+	font-size: 24rpx;
+	font-weight: 700;
+}
+.shopcart .content .content-right .pay.not-enough {
+	background-color: #2b333b;
+}
+.shopcart .content .content-right .pay.enough {
+	background-color: #00b43c;
+	color: #FFFFFF;
+}
+.shopcart .ball-container .ball {
+	position: fixed;
+	left: 64rpx;
+	/* bottom: 44rpx; */
+	bottom: 134rpx;
+	z-index: 200;
+	-webkit-transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41);
+	transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41);
+}
+.shopcart .ball-container .ball .inner {
+	width: 32rpx;
+	height: 32rpx;
+	border-radius: 50%;
+	background-color: rgb(0, 160, 220);
+	-webkit-transition: all .4s linear;
+	transition: all .4s linear;
+}
+.shopcart .shopcart-list {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+	width: 100%;
+	/* transform: translate3d(0, -100%, 0); */
+	-webkit-transform: translate3d(0, 0, 0);
+	        transform: translate3d(0, 0, 0);
+}
+
+/* 动画 */
+.shopcart .shopcart-list .list-header {
+	height: 80rpx;
+	line-height: 80rpx;
+	padding: 0 36rpx;
+	background-color: #f3f5f7;
+	border-bottom: 2rpx solid rgba(7, 17, 27, 0.1);
+}
+.shopcart .shopcart-list .list-header .title {
+	float: left;
+	font-size: 28rpx;
+	color: rgb(7, 17, 27);
+}
+.shopcart .shopcart-list .list-header .empty {
+	float: right;
+	font-size: 24rpx;
+	color: rgb(0, 160, 220);
+}
+.shopcart .shopcart-list .list-content {
+	padding: 0 36rpx;
+	max-height: 434rpx;
+	overflow: hidden;
+	background-color: #FFFFFF;
+}
+.shopcart .shopcart-list .list-content .food {
+	position: relative;
+	padding: 24rpx 0;
+	box-sizing: border-box;
+}
+.shopcart .shopcart-list .list-content .food::after {
+	position: absolute;
+	content: '';
+	display: block;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	border-top: 2rpx solid rgba(7, 17, 27, .1);
+}
+.shopcart .shopcart-list .list-content .food .name {
+	line-height: 48rpx;
+	font-size: 28rpx;
+	color: rgb(7, 17, 27);
+}
+.shopcart .shopcart-list .list-content .food .price {
+	position: absolute;
+	right: 180rpx;
+	bottom: 24rpx;
+	line-height: 48rpx;
+	font-size: 28rpx;
+	font-weight: 700;
+	color: rgb(240, 20, 20);
+}
+.shopcart .shopcart-list .list-content .food .cartcontrol-wrapper {
+	position: absolute;
+	right: 0;
+	bottom: 12rpx;
+}
+.list-mask {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 40;
+	-webkit-backdrop-filter: blur(10px);
+	        backdrop-filter: blur(10px);
+	opacity: 1;
+	background-color: rgba(7, 17, 27, .6);
+}
+
+/* 动画 */
+

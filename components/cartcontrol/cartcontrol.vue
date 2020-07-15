@@ -6,82 +6,94 @@
 			</view>
 		</view>
 		<view class="cart-count" v-show="food.count>0">{{food.count}}</view>
-		<view class="cart-add icon icon-add_circle" @tap.stop="addCart"></view>
+		<view class="cart-add icon icon-add_circle" @tap.stop="addCart" id="addCart"></view>
 	</view>
 </template>
 
 <script>
 	export default {
-		// props: {
-		// 	food: {
-		// 		type: Object
-		// 	}
-		// },
+		props: {
+			food: {
+				type: Object
+			}
+		},
 		data() {
 			return {
-				food: {
-					count: 0,
-				},
+				// food: {
+				// 	count: 0,
+				// },
 				innerAnimationData: {},
 				moveAnimationData: {}
 			};
 		},
 		methods: {
 			addCart(event) {
-					this.enter()
+				
 				// if (!event._constructed) {
 				// 	return;
 				// }
-				// if (!this.food.count) {
-				// 	Vue.set(this.food, 'count', 1);
-				// } else {
-				// 	this.food.count++;
-				// }
+				if (!this.food.count) {
+					this.enter()
+					this.$set(this.food, 'count', 1);
+				} else {
+					this.food.count++;
+				}
 				// 点击添加购物车，会出发添加动画
-				this.food.count++
-				// this.$emit('add', event.target);
+				// this.food.count++
+				this.$emit('add', event.target);
+				// console.log(event)
+				// let el = uni.createSelectorQuery()
+				// el.select('#addCart').boundingClientRect(data=>{
+				// 	console.log(data)
+				// }).exec()
+				// console.log(this.$el)
+				// console.log(this.$refs.addCart.$el)
 			},
 			decreaseCart(event) {
 				// if (!event._constructed) {
 				// 	return;
 				// }
-				if(this.food.count <= 1)
-				this.leave()
+				// if (this.food.count < 1)
+					// this.leave()
 				if (this.food.count) {
-					this.food.count--;
+					this.$nextTick(() => {
+						this.food.count--;
+						console.log(this.food.count)
+					})
+
 				}
 
 			},
 			enter() {
-				let move = uni.createAnimation({
-					duration: 400,
-					timingFunction: 'linear'
+				let move = uni.createAnimation()
+				let inner = uni.createAnimation()
+				inner.rotate(0).step({duration:0})
+				inner.rotate(180).step({duration:400})
+				move.translate3d(24,0,0).step({
+					duration:0
 				})
-				let inner = uni.createAnimation({
-					duration: 400,
-					timingFunction: 'linear'
+				move.opacity(1).translate3d(0, 0, 0).step({
+					duration:400
 				})
-				inner.rotate(180).step()
-				move.opacity(1).translate3d(0, 0, 0).step()
-
 				this.$nextTick(function() {
 					this.innerAnimationData = inner.export()
 					this.moveAnimationData = move.export()
 				})
 			},
 			leave() {
-				let move = uni.createAnimation({
-					duration: 400,
-					timingFunction: 'linear',
-					delay: 0
-				})
+				let move = uni.createAnimation()
 				let inner = uni.createAnimation({
 					duration: 400,
 					timingFunction: 'linear',
 					delay: 0
 				})
 				inner.rotate(0).step()
-				move.opacity(0).translate3d(24, 0, 0).step()
+				move.translate3d(24,0,0).step({
+					duration:0
+				})
+				move.opacity(0).translate3d(24, 0, 0).step({
+					duration:400
+				})
 				this.$nextTick(function() {
 					this.innerAnimationData = inner.export()
 					this.moveAnimationData = move.export()
@@ -105,7 +117,8 @@
 		display: inline-block;
 		padding: 12rpx;
 		opacity: 1;
-		transform: translate3d(24px, 0, 0);
+		/* transform: translate3d(24px, 0, 0); */
+		transform: translate3d(0, 0, 0);
 	}
 
 	.cartcontrol .cart-decrease .inner {
