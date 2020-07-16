@@ -1,6 +1,6 @@
 <template>
 	<view class="animation">
-		<scroll-view class="food" v-show="showFlag" id="food" scroll-y="true">
+		<scroll-view class="food" v-show="showFlag" id="food" scroll-y="true" :animation="animationData">
 			<view class="food-content">
 				<view class="image-header">
 					<view class="image">
@@ -93,7 +93,8 @@
 					all: '全部',
 					positive: '推荐',
 					negative: '吐槽'
-				}
+				},
+				animationData: {}
 			};
 		},
 		methods: {
@@ -101,17 +102,9 @@
 				this.showFlag = true;
 				this.selectType = ALL;
 				this.onlyContent = true;
-				// this.$nextTick(() => {
-				// 	if (!this.scroll) {
-				// 		this.scroll = new BScroll(this.$refs.food, {
-				// 			click: true
-				// 		});
-				// 	} else {
-				// 		this.scroll.refresh();
-				// 	}
-				// });
 			},
 			hide() {
+				this.leave()
 				this.showFlag = false;
 			},
 			needShow(type, text) {
@@ -132,7 +125,32 @@
 			},
 			toggleContent() {
 				this.onlyContent = !this.onlyContent;
+			},
+			enter() {
+				let enter = uni.createAnimation()
+				enter.translate3d(750, 0, 0).step({
+					duration: 0
+				})
+				enter.translate3d(0, 0, 0).step({
+					duration: 2000
+				})
+				this.animationData = enter.export()
+				this.animationData = {}
+			},
+			leave(){
+				let leave = uni.createAnimation()
+				leave.translate3d(0, 0, 0).step({
+					duration: 0
+				})
+				leave.translate3d(750, 0, 0).step({
+					duration: 2000
+				})
+				this.animationData = leave.export()
+				this.animationData = {}
 			}
+		},
+		onShow() {
+			this.enter()
 		},
 		filters: {
 			formatDate(time) {
@@ -159,6 +177,7 @@
 		width: 100%;
 		background-color: #fff;
 		transform: translate3d(0, 0, 0);
+		transition: all 0.2s linear
 	}
 
 	/* 动画 */
