@@ -79,6 +79,7 @@
 		flex-direction: row;
 		height: 36px;
 		overflow: hidden;
+		border-bottom: 2rpx solid rgba(7,17,27,0.1);
 	}
 
 	.segmented-control__item {

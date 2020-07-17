@@ -10,7 +10,7 @@
 				<ratings :seller="seller"></ratings>
 			</view>
 			<view class="content-item" v-if="current === 2">
-				333
+				<seller :seller="seller"></seller>
 			</view>
 		</view>
 	</view>
@@ -21,6 +21,7 @@
 	import Tab from '../../components/uni-segmented-control/uni-segmented-control.vue'
 	import Goods from '../../components/goods/goods.vue'
 	import Ratings from '../../components/ratings/ratings.vue'
+	import Seller from '../../components/seller/seller.vue'
 	export default {
 		data() {
 			return {
@@ -51,7 +52,8 @@
 			"my-header": Header,
 			"uni-segmented-control": Tab,
 			"my-goods": Goods,
-			"ratings": Ratings
+			"ratings": Ratings,
+			"seller": Seller
 		}
 	}
 </script>
