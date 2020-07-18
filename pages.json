@@ -14,7 +14,9 @@
         }
         ,{
             "path" : "pages/userRank/userRank",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"会员等级"
+			}
         }
         ,{
             "path" : "pages/takeOrder/takeOrder",
