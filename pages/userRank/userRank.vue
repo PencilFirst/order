@@ -4,13 +4,13 @@
 			<view class="top">
 				<image class="icon" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTk0OTgyODI1NDgzIiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9Ijc3NzUiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj48L3N0eWxlPjwvZGVmcz48cGF0aCBkPSJNOTM2Ljk2IDM4NS44NzczMzNsLTIwMy40MzQ2NjctMjA0LjgtMTguMDkwNjY3LTcuNjhMMzA4LjU2NTMzMyAxNzMuMzk3MzMzbC0xOC4wOTA2NjcgNy42OEw4Ny4wNCAzODUuODc3MzMzYy05LjcyOCA5Ljg5ODY2Ny05Ljg5ODY2NyAyNS45NDEzMzMtMC4xNzA2NjcgMzUuODRsNDA2Ljg2OTMzMyA0MjEuMDM0NjY3YzQuNzc4NjY3IDQuOTQ5MzMzIDExLjQzNDY2NyA3Ljg1MDY2NyAxOC40MzIgNy44NTA2NjcgNi45OTczMzMgMCAxMy42NTMzMzMtMi45MDEzMzMgMTguNDMyLTcuODUwNjY3bDQwNi44NjkzMzMtNDIxLjAzNDY2N0M5NDYuODU4NjY3IDQxMS42NDggOTQ2LjY4OCAzOTUuNzc2IDkzNi45NiAzODUuODc3MzMzek04NjguNTIyNjY3IDM4OS42MzJsLTE0MS45OTQ2NjcgMC0xNjMuODQtMTY1LjAzNDY2NyAxNDEuOTk0NjY3IDBMODY4LjUyMjY2NyAzODkuNjMyek0zMTkuMzE3MzMzIDIyNC43NjhsMTQzLjAxODY2NyAwLTE2My44NCAxNjUuMDM0NjY3TDE1NS40NzczMzMgMzg5LjgwMjY2NyAzMTkuMzE3MzMzIDIyNC43Njh6TTE3Ni40NjkzMzMgNDQwLjgzMmwxMzIuNjA4IDAgMTguMDkwNjY3LTcuNTA5MzMzIDE4NS4xNzMzMzMtMTg2LjUzODY2NyAxODUuMTczMzMzIDE4Ni41Mzg2NjcgMTguMDkwNjY3IDcuNTA5MzMzIDEzMS41ODQgMEw1MTIgNzg3Ljk2OCAxNzYuNDY5MzMzIDQ0MC44MzJ6IiBwLWlkPSI3Nzc2Ij48L3BhdGg+PC9zdmc+"
 				 mode="widthFix"></image>
-				<text class="title">青铜会员</text>
+				<text class="title">{{options[myInfo.level].title}}</text>
 			</view>
 			<view class="bottom">
-				<text class="next-level">再消费200元可晋级白银会员</text>
+				<text class="next-level">再消费{{myInfo.need}}元可晋级{{options[myInfo.level+1>4?4:myInfo.level+1].title}}</text>
 				<view class="user-rights">
 					<text class="title">我的权益</text>
-					<view class="right" v-for="(item,index) in options[0].discounts">
+					<view class="right" v-for="(item,index) in options[myInfo.level].discounts">
 						<text class="item">{{index+1 + '.'+item}}</text>
 						<!-- <text class="item">会员立减</text> -->
 						<!-- <text class="item">运费免单</text> -->
@@ -18,7 +18,7 @@
 				</view>
 			</view>
 		</view>
-		<uni-steps :options="options" direction="column" activeColor="rgba(240,20,20,.8)" :active=0></uni-steps>
+		<uni-steps :options="options" direction="column" activeColor="rgba(240,20,20,.8)" style="width: 94%;":active="myInfo.level"></uni-steps>
 		<view class="rank-rule">
 			<view class="title">
 				等级规则
@@ -35,6 +35,10 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapGetters
+	} from 'vuex'
 	import uniSteps from '../../components/uni-steps/uni-steps.vue'
 	export default {
 		data() {
@@ -74,6 +78,39 @@
 		},
 		methods: {
 
+		},
+		computed: {
+			...mapState(['orderList']),
+			...mapGetters(['getTotalPrice']),
+			myInfo() {
+				const _this = this
+				if (this.getTotalPrice < 200) {
+					return {
+						level: 0,
+						need: 200 - this.getTotalPrice
+					}
+				} else if (this.getTotalPrice < 500) {
+					return {
+						level: 1,
+						need: 500 - this.getTotalPrice
+					}
+				} else if (this.getTotalPrice < 800) {
+					return {
+						level: 2,
+						need: 800 - this.getTotalPrice
+					}
+				} else if (this.getTotalPrice < 1000) {
+					return {
+						level: 3,
+						need: 1000 - this.getTotalPrice
+					}
+				} else {
+					return {
+						level: 4,
+						need: 0
+					}
+				}
+			}
 		},
 		components: {
 			"uni-steps": uniSteps

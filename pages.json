@@ -20,11 +20,15 @@
         }
         ,{
             "path" : "pages/takeOrder/takeOrder",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"取餐"
+			}
         }
         ,{
             "path" : "pages/orderList/orderList",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"订单中心"
+			}
         }
     ],
 	"globalStyle": {

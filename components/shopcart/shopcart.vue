@@ -55,6 +55,9 @@
 </template>
 
 <script>
+	import {
+		mapMutations
+	} from 'vuex'
 	import cartControl from '../cartcontrol/cartcontrol.vue'
 	export default {
 		props: {
@@ -72,31 +75,6 @@
 		},
 		data() {
 			return {
-				// selectFoods: [{
-				// 	price: 20,
-				// 	name: "皮蛋瘦肉粥",
-				// 	count: 1
-				// }, {
-				// 	price: 20,
-				// 	name: "皮蛋瘦肉粥",
-				// 	count: 1
-				// }, {
-				// 	price: 20,
-				// 	name: "皮蛋瘦肉粥",
-				// 	count: 1
-				// }, {
-				// 	price: 20,
-				// 	name: "皮蛋瘦肉粥",
-				// 	count: 1
-				// }, {
-				// 	price: 20,
-				// 	name: "皮蛋瘦肉粥",
-				// 	count: 1
-				// }, {
-				// 	price: 20,
-				// 	name: "皮蛋瘦肉粥",
-				// 	count: 1
-				// }],
 				fold: true,
 				toggleAnimationData: {},
 				dropBalls: [],
@@ -166,6 +144,7 @@
 			}
 		},
 		methods: {
+			...mapMutations(['putOrder']),
 			toggleList() {
 				if (!this.totalCount) {
 					return
@@ -174,10 +153,72 @@
 			},
 			// 结账方法
 			pay() {
+				const _this = this
 				if (this.totalPrice < this.minPrice) {
 					return;
 				}
-				window.alert(`支付${this.totalPrice}元`);
+				// window.alert(`支付${this.totalPrice}元`);
+				uni.showModal({
+					title: '提交订单',
+					content: '确认是否下单',
+					success(res) {
+						if (res.confirm) {
+
+							const goodItem = []
+							_this.selectFoods.forEach((food) => {
+								const item = Object.assign({}, {
+									name: food.name,
+									price: food.price,
+									count: food.count
+								})
+								goodItem.push(item)
+							})
+							console.log(goodItem)
+							const orderList = {
+								orderNumber: new Date().getTime(),
+								status: 0,
+								totalPrice: _this.totalPrice,
+								totalCount: _this.totalCount,
+								orderItem: goodItem
+							}
+							_this.putOrder(orderList)
+							_this.empty()
+							uni.showToast({
+								title: '下单成功',
+								icon: 'success',
+								position: 'center',
+								duration: 1500
+							})
+						} else if (res.cancel) {
+							uni.showToast({
+								title: '已取消',
+								icon: 'none',
+								position: 'center',
+								duration: 1500
+							})
+						}
+					},
+					fail() {
+
+					}
+				})
+
+				// console.log(new Date().getTime())
+				// {
+				// 	orderNumber:new Date().getTime(),
+				// 	status:0,
+				// 	totalPrice:this.totalPrice,
+				// 	orderItem:[]
+				// }
+
+				// {
+				//  单号: new Date().getTime(),
+				// 	订单状态: 0 ,
+				// 	订单总价格: this.totalPrice,
+				// 	订单详情: goodItem
+
+				// 一共多少东西：totalCount
+				// }
 			},
 			empty() {
 				this.selectFoods.forEach((food) => {
@@ -288,7 +329,7 @@
 					let offset = HEIGHT * cout + 40 > 247 ? 247 : HEIGHT * cout + 40
 					let toggle = uni.createAnimation()
 					toggle.translate3d(0, -offset, 0).step({
-						duration:0
+						duration: 0
 					})
 					this.toggleAnimationData = toggle.export()
 				}

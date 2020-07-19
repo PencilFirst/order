@@ -2,10 +2,10 @@
 	<view class="user">
 		<view class="user-info">
 			<view class="avatar">
-				<image src="../../static/logo.png" mode="widthFix"></image>
+				<image :src="accountInfo.url" mode="widthFix"></image>
 			</view>
 			<view class="username">
-				铅笔
+				{{accountInfo.username}}
 			</view>
 		</view>
 		<view class="operate">
@@ -51,8 +51,14 @@
 	export default {
 		data() {
 			return {
-
+				accountInfo: {
+					url: '../../static/logo.png',
+					username: '铅笔'
+				}
 			}
+		},
+		created() {
+			// this.accountInfo = uni.getAccountInfoSync();
 		},
 		methods: {
 
