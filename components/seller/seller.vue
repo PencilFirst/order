@@ -4,7 +4,9 @@
 			<view class="overview">
 				<text class="title">{{seller.name}}</text>
 				<view class="desc">
-					<star :size="36" :score="seller.score"></star>
+					<view class="stars">
+						<star :size="36" :score="seller.score"></star>
+					</view>
 					<text class="text">{{seller.ratingCount}}</text>
 					<text class="text">月售{{seller.sellCount}}单</text>
 				</view>
@@ -161,7 +163,7 @@
 		border-top: 2rpx solid rgba(7, 17, 27, 0.1);
 	}
 
-	.seller .overview .desc .star {
+	.seller .overview .desc .stars {
 		display: inline-block;
 		margin-right: 16rpx;
 		vertical-align: top;

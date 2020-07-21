@@ -22,7 +22,7 @@
 						<text class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</text>
 					</view>
 					<view class="cartcontrol-wrapper">
-						<cartcontrol :food="food"></cartcontrol>
+						<cartcontrol :food="food" :index="food.payload.second" :first="food.payload.first"></cartcontrol>
 					</view>
 					<view class="animation">
 						<!-- 购物车 -->
@@ -70,6 +70,9 @@
 
 <script>
 	import {
+		mapState
+	} from 'vuex'
+	import {
 		formatDate
 	} from '../../util/date.js'
 	import cartControl from '../cartcontrol/cartcontrol.vue'
@@ -97,6 +100,9 @@
 				animationData: {}
 			};
 		},
+		computed: {
+			...mapState(['goods'])
+		},
 		methods: {
 			show() {
 				this.showFlag = true;
@@ -118,7 +124,14 @@
 				}
 			},
 			addFirst() {
-				this.$set(this.food, 'count', 1);
+			// 	console.log(this.food.payload)
+				let {
+					first,
+					second
+				} = this.food.payload
+				
+			this.$set(this.goods[first].foods[second],'count',1)
+				// this.$set(this.food, 'count', 1);
 			},
 			selectRating(type) {
 				this.selectType = type;
@@ -137,7 +150,7 @@
 				this.animationData = enter.export()
 				this.animationData = {}
 			},
-			leave(){
+			leave() {
 				let leave = uni.createAnimation()
 				leave.translate3d(0, 0, 0).step({
 					duration: 0
@@ -170,8 +183,18 @@
 	.food {
 		position: fixed;
 		left: 0;
+		/* #ifdef H5 */
 		top: 88rpx;
+		/* #endif */
+		/* #ifndef H5 */
+		top: 0;
+		/* #endif */
+		/* #ifdef H5 */
 		bottom: 185rpx;
+		/* #endif */
+		/* #ifndef H5 */
+		bottom: 98rpx;
+		/* #endif */
 		/* bottom: 300rpx; */
 		z-index: 30;
 		width: 100%;

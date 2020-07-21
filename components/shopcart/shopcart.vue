@@ -40,7 +40,7 @@
 								<text>￥{{food.price * food.count}}</text>
 							</view>
 							<view class="cartcontrol-wrapper">
-								<cartcontrol :food="food" @add="addFood"></cartcontrol>
+								<cartcontrol :food="food" @add="addFood" :first="food.payload.first" :index="food.payload.second"></cartcontrol>
 							</view>
 						</view>
 					</scroll-view>
@@ -129,22 +129,11 @@
 					return false;
 				}
 				let show = !this.fold;
-				// if (show) {
-				//   this.$nextTick(() => {
-				//     if (!this.scroll) {
-				//       this.scroll = new BScroll(this.$refs.listContent, {
-				//         click: true
-				//       });
-				//     } else {
-				//       this.scroll.refresh();
-				//     }
-				//   });
-				// }
 				return show;
 			}
 		},
 		methods: {
-			...mapMutations(['putOrder']),
+			...mapMutations(['putOrder', 'empty']),
 			toggleList() {
 				if (!this.totalCount) {
 					return
@@ -166,14 +155,18 @@
 
 							const goodItem = []
 							_this.selectFoods.forEach((food) => {
-								const item = Object.assign({}, {
+								// const item = Object.assign({}, {
+								// 	name: food.name,
+								// 	price: food.price,
+								// 	count: food.count
+								// })
+								goodItem.push({
 									name: food.name,
 									price: food.price,
 									count: food.count
 								})
-								goodItem.push(item)
 							})
-							console.log(goodItem)
+							// console.log(goodItem)
 							const orderList = {
 								orderNumber: new Date().getTime(),
 								status: 0,
@@ -202,29 +195,12 @@
 
 					}
 				})
-
-				// console.log(new Date().getTime())
-				// {
-				// 	orderNumber:new Date().getTime(),
-				// 	status:0,
-				// 	totalPrice:this.totalPrice,
-				// 	orderItem:[]
-				// }
-
-				// {
-				//  单号: new Date().getTime(),
-				// 	订单状态: 0 ,
-				// 	订单总价格: this.totalPrice,
-				// 	订单详情: goodItem
-
-				// 一共多少东西：totalCount
-				// }
 			},
-			empty() {
-				this.selectFoods.forEach((food) => {
-					food.count = 0;
-				});
-			},
+			// empty() {
+			// 	this.selectFoods.forEach((food) => {
+			// 		food.count = 0;
+			// 	});
+			// },
 			hideList() {
 				this.fold = true;
 			},
@@ -269,7 +245,7 @@
 						let inner = el.getElementsByClassName('inner-hook')[0]
 						inner.style.webkitTransform = `translate3d(${x}px,0,0)`
 						inner.style.transform = `translate3d(${x}px,0,0)`
-						console.log(el.style)
+						// console.log(el.style)
 					}
 				}
 			},
@@ -316,24 +292,24 @@
 		watch: {
 			fold(old, cur) {
 				if (cur) {
-					this.enter()
+					// this.enter()
 				} else {
-					this.leave()
+					// this.leave()
 				}
 			},
-			selectFoods(old, cur) {
-				console.log(old, cur)
-				if (old.length < cur.length) {
-					const HEIGHT = 48
-					let cout = this.selectFoods.length
-					let offset = HEIGHT * cout + 40 > 247 ? 247 : HEIGHT * cout + 40
-					let toggle = uni.createAnimation()
-					toggle.translate3d(0, -offset, 0).step({
-						duration: 0
-					})
-					this.toggleAnimationData = toggle.export()
-				}
-			}
+			// selectFoods(old, cur) {
+			// 	// console.log(old, cur)
+			// 	if (old.length < cur.length) {
+			// 		const HEIGHT = 48
+			// 		let cout = this.selectFoods.length
+			// 		let offset = HEIGHT * cout + 40 > 247 ? 247 : HEIGHT * cout + 40
+			// 		let toggle = uni.createAnimation()
+			// 		toggle.translate3d(0, -offset, 0).step({
+			// 			duration: 0
+			// 		})
+			// 		this.toggleAnimationData = toggle.export()
+			// 	}
+			// }
 		},
 		components: {
 			"cartcontrol": cartControl
@@ -344,7 +320,12 @@
 <style>
 	.shopcart {
 		position: fixed;
+		/* #ifdef H5 */
 		bottom: 90rpx;
+		/* #endif */
+		/* #ifndef H5 */
+		bottom: 0;
+		/* #endif */
 		left: 0;
 		z-index: 50;
 		width: 100%;
@@ -484,8 +465,8 @@
 		top: 0;
 		z-index: -1;
 		width: 100%;
-		/* transform: translate3d(0, -100%, 0); */
-		transform: translate3d(0, 0, 0);
+		transform: translate3d(0, -100%, 0);
+		/* transform: translate3d(0, 0, 0); */
 	}
 
 	/* 动画 */

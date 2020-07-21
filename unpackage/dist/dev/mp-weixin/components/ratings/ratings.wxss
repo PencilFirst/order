@@ -1,0 +1,199 @@
+
+.ratings {
+	position: absolute;
+	top: 348rpx;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	overflow: hidden;
+}
+.ratings .overview {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	padding: 36rpx 0;
+}
+.ratings .overview .overview-left {
+	/* flex: 0 0 348rpx; */
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 0 240rpx;
+	        flex: 0 0 240rpx;
+	padding: 12rpx 0;
+	/* width: 348rpx; */
+	width: 240rpx;
+	border-right: 2rpx solid rgba(7, 17, 27, 0.1);
+	text-align: center;
+}
+
+/*@ media only screen and (max-width:320px) {
+	.ratings .overview
+	.overview-left {
+		flex: 0 0 240rpx;
+		width: 240rpx;
+	}
+} */
+.ratings .overview .overview-left .score {
+	margin-bottom: 12rpx;
+	line-height: 36rpx;
+	font-size: 48rpx;
+	color: rgb(255, 153, 0);
+}
+.ratings .overview .overview-left .title {
+	margin-bottom: 16rpx;
+	line-height: 24rpx;
+	font-size: 24rpx;
+	color: rgb(7, 17, 27);
+}
+.ratings .overview .overview-left .rank {
+	line-height: 20rpx;
+	font-size: 20rpx;
+	color: rgb(147, 153, 159);
+}
+.ratings .overview .overview-right {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	padding: 12rpx 0 12rpx 48rpx;
+}
+
+/* 
+ @media only screen and (max-width:320px) {
+	.ratings .overview
+	.overview-right{
+		padding-left: 12rpx;
+	}
+} */
+.ratings .overview .overview-right .score-wrapper {
+	margin-bottom: 16rpx;
+	font-size: 0;
+	/* 	width: 100%;
+	display: inline-block; */
+}
+.ratings .overview .overview-right .score-wrapper .title {
+	display: inline-block;
+	line-height: 36rpx;
+	vertical-align: top;
+	font-size: 24rpx;
+	color: rgb(7, 17, 27);
+}
+.ratings .overview .overview-right .score-wrapper .stars {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 24rpx;
+	width: 50%;
+}
+.ratings .overview .overview-right .score-wrapper .score {
+	display: inline-block;
+	line-height: 36rpx;
+	vertical-align: top;
+	font-size: 24rpx;
+	color: rgb(255, 153, 0);
+}
+.ratings .overview .overview-right .delivery-wrapper {
+	font-size: 0;
+}
+.ratings .overview .overview-right .delivery-wrapper .title {
+	line-height: 36rpx;
+	font-size: 24rpx;
+	color: rgb(7, 17, 27);
+}
+.ratings .overview .overview-right .delivery-wrapper .delivery {
+	margin-left: 24rpx;
+	font-size: 24rpx;
+	color: rgb(147, 153, 159);
+}
+.ratings .rating-wrapper {
+	padding: 0 36rpx;
+}
+.ratings .rating-wrapper .rating-item {
+	position: relative;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	padding: 36rpx 0;
+}
+.ratings .rating-wrapper .rating-item::after {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	content: '';
+	display: block;
+	border-top: 2rpx solid rgba(7, 17, 27, 0.1);
+}
+.ratings .rating-wrapper .rating-item .avatar {
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 0 56rpx;
+	        flex: 0 0 56rpx;
+	width: 56rpx;
+	margin-right: 24rpx;
+}
+.ratings .rating-wrapper .rating-item .avatar image {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.ratings .rating-wrapper .rating-item .content {
+	position: relative;
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+}
+.ratings .rating-wrapper .rating-item .content .name {
+	margin-bottom: 8rpx;
+	line-height: 24rpx;
+	font-size: 20rpx;
+	color: rgb(7, 17, 27);
+}
+.ratings .rating-wrapper .rating-item .content .star-wrapper {
+	margin-bottom: 32rpx;
+	font-size: 0;
+}
+.ratings .rating-wrapper .rating-item .content .star-wrapper .stars {
+	display: inline-block;
+	margin-right: 12rpx;
+	vertical-align: top;
+	width: 130rpx;
+}
+.ratings .rating-wrapper .rating-item .content .star-wrapper .delivery {
+	display: inline-block;
+	vertical-align: top;
+	line-height: 24rpx;
+	font-size: 20rpx;
+	color: rgb(147, 153, 159);
+}
+.ratings .rating-wrapper .rating-item .content .text {
+	margin-bottom: 16rpx;
+	line-height: 36rpx;
+	font-size: 24rpx;
+	color: rgb(7, 17, 27);
+}
+.ratings .rating-wrapper .rating-item .content .recommend {
+	line-height: 32rpx;
+	font-size: 0;
+}
+.ratings .rating-wrapper .rating-item .content .recommend .icon-thumb_up,
+.item {
+	display: inline-block;
+	margin: 0 16rpx 8rpx 0;
+	font-size: 18rpx;
+}
+.ratings .rating-wrapper .rating-item .content .recommend .icon-thumb_up {
+	color: rgb(0, 160, 220);
+}
+.ratings .rating-wrapper .rating-item .content .recommend .item {
+	padding: 0 12rpx;
+	border: 2rpx solid rgba(7, 17, 27, 0.1);
+	border-radius: 2rpx;
+	color: rgb(147, 153, 159);
+	background-color: #FFFFFF;
+}
+.ratings .rating-wrapper .rating-item .content .time {
+	position: absolute;
+	top: 0;
+	right: 0;
+	line-height: 24rpx;
+	font-size: 20rpx;
+	color: rgb(147, 153, 159);
+}
+

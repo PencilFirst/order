@@ -1,20 +1,29 @@
 <template>
 	<view class="cartcontrol">
 		<view class="animation">
-			<view class="cart-decrease" v-show="food.count > 0" @tap.stop="decreaseCart" :animation="moveAnimationData">
+			<view class="cart-decrease" v-if="food.count > 0" @tap.stop="decreaseCart" :animation="moveAnimationData">
 				<text class="inner icon icon-remove_circle_outline" :animation="innerAnimationData"></text>
 			</view>
 		</view>
-		<view class="cart-count" v-show="food.count>0">{{food.count}}</view>
+		<view class="cart-count" v-if="food.count>0">{{food.count}} </view>
 		<view class="cart-add icon icon-add_circle" @tap.stop="addCart" id="addCart"></view>
 	</view>
 </template>
 
 <script>
+	import {
+		mapMutations
+	} from 'vuex'
 	export default {
 		props: {
 			food: {
-				type: Object
+				type: Object,
+			},
+			index: {
+				type: Number
+			},
+			first: {
+				type: Number
 			}
 		},
 		data() {
@@ -26,21 +35,26 @@
 				moveAnimationData: {}
 			};
 		},
+		show() {
+			console.log(this.food)
+		},
 		methods: {
+			...mapMutations(['add', 'desc']),
 			addCart(event) {
-				
-				// if (!event._constructed) {
-				// 	return;
+				// const _this = this
+				// if (!this.food.count) {
+					// this.enter()
+				// } else {
+				// 	this.food.count++;
 				// }
-				if (!this.food.count) {
-					this.enter()
-					this.$set(this.food, 'count', 1);
-				} else {
-					this.food.count++;
-				}
+				this.add({
+					first: this.first,
+					second: this.index
+				})
+				// this.$emit('add', this.food, this.index, this.first);
 				// 点击添加购物车，会出发添加动画
 				// this.food.count++
-				this.$emit('add', event.target);
+				// this.$emit('add', event.target);
 				// console.log(event)
 				// let el = uni.createSelectorQuery()
 				// el.select('#addCart').boundingClientRect(data=>{
@@ -53,27 +67,34 @@
 				// if (!event._constructed) {
 				// 	return;
 				// }
-				// if (this.food.count < 1)
+				// if (this.food.count === 1)
 					// this.leave()
-				if (this.food.count) {
-					this.$nextTick(() => {
-						this.food.count--;
-						console.log(this.food.count)
-					})
-
-				}
-
+				// if (this.food.count) {
+				// 	this.$nextTick(() => {
+				// 		this.food.count--;
+				// 		console.log(this.food.count)
+				// 	})
+				// 	this.$emit('add', this.food, this.index, this.first);
+				// }
+				this.desc({
+					first: this.first,
+					second: this.index
+				})
 			},
 			enter() {
 				let move = uni.createAnimation()
 				let inner = uni.createAnimation()
-				inner.rotate(0).step({duration:0})
-				inner.rotate(180).step({duration:400})
-				move.translate3d(24,0,0).step({
-					duration:0
+				// inner.rotate(0).step({
+				// 	duration: 0
+				// })
+				inner.rotate(180).step({
+					duration: 400
 				})
+				// move.translate3d(24, 0, 0).step({
+				// 	duration: 0
+				// })
 				move.opacity(1).translate3d(0, 0, 0).step({
-					duration:400
+					duration: 400
 				})
 				this.$nextTick(function() {
 					this.innerAnimationData = inner.export()
@@ -82,22 +103,26 @@
 			},
 			leave() {
 				let move = uni.createAnimation()
-				let inner = uni.createAnimation({
+				let inner = uni.createAnimation()
+			
+				// inner.rotate(0).step({
+				// 	duration: 0,
+				// })
+				
+				inner.rotate(180).step({
 					duration: 400,
-					timingFunction: 'linear',
-					delay: 0
 				})
-				inner.rotate(0).step()
-				move.translate3d(24,0,0).step({
-					duration:0
-				})
+			
+				// move.translate3d(24, 0, 0).step({
+				// 	duration: 0
+				// })
 				move.opacity(0).translate3d(24, 0, 0).step({
-					duration:400
+					duration: 400
 				})
-				this.$nextTick(function() {
+				// this.$nextTick(function() {
 					this.innerAnimationData = inner.export()
 					this.moveAnimationData = move.export()
-				})
+				// })
 			}
 		}
 	}

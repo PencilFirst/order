@@ -46,6 +46,7 @@
 <style>
 	.star {
 		font-size: 0;
+		width: 100%;
 	}
 
 	.star .star-item {

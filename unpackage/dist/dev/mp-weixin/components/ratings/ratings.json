@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "star": "/components/star/star",
+    "split": "/components/split/split",
+    "ratingselect": "/components/ratingselect/ratingselect"
+  }
+}

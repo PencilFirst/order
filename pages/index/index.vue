@@ -36,9 +36,16 @@
 		},
 		methods: {
 			async getHeaderInfo() {
+				// #ifdef H5
 				const res = await this.$http({
 					url: '/api/seller'
 				})
+				// #endif
+				// #ifndef H5
+					const res = await this.$http({
+						url: '/seller'
+					})
+				// #endif
 				// console.log(res.data.data)
 				this.seller = res.data.data
 			},

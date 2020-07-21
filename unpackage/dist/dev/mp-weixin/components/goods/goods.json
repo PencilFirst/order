@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "cartcontrol": "/components/cartcontrol/cartcontrol",
-    "shopcart": "/components/shopcart/shopcart"
+    "shopcart": "/components/shopcart/shopcart",
+    "food": "/components/food/food"
   }
 }

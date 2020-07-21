@@ -1,0 +1,208 @@
+
+.food {
+	position: fixed;
+	left: 0;
+
+
+
+
+	top: 0;
+
+
+
+
+
+	bottom: 98rpx;
+
+	/* bottom: 300rpx; */
+	z-index: 30;
+	width: 100%;
+	background-color: #fff;
+	-webkit-transform: translate3d(0, 0, 0);
+	        transform: translate3d(0, 0, 0);
+	-webkit-transition: all 0.2s linear;
+	transition: all 0.2s linear
+}
+
+/* 动画 */
+.food .food-content .image-header {
+	position: relative;
+	width: 100%;
+	height: 0;
+	padding-top: 100%;
+}
+.food .food-content .image-header .image {
+	position: absolute;
+	/* top: 88rpx; */
+	top: 0rpx;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.food .food-content .image-header .image image {
+	width: 100%;
+	height: 100% !important;
+}
+.food .image-header .back {
+	position: absolute;
+	/* top: 108rpx; */
+	top: 20rpx;
+	left: 0;
+}
+.food .image-header .back .icon-arrow_lift {
+	display: block;
+	padding: 20rpx;
+	font-size: 40rpx;
+	color: #fff;
+}
+.food .content {
+	position: relative;
+	padding: 36rpx;
+}
+.food .content .title {
+	line-height: 28rpx;
+	margin-bottom: 16rpx;
+	font-size: 28rpx;
+	font-weight: 700;
+	color: rgb(7, 17, 27);
+}
+.food .content .detail {
+	margin-bottom: 36rpx;
+	line-height: 20rpx;
+	height: 20rpx;
+	font-size: 0;
+}
+.food .content .detail .sell-count,
+.rating {
+	font-size: 20rpx;
+	color: rgb(147, 153, 159);
+}
+.food .content .detail .sell-count {
+	margin-right: 24rpx;
+}
+.food .content .price {
+	font-weight: 700;
+	line-height: 48rpx;
+}
+.food .content .price .now {
+	margin-right: 16rpx;
+	font-size: 28rpx;
+	color: rgb(240, 20, 20);
+}
+.food .content .price .old {
+	text-decoration: line-through;
+	font-size: 20rpx;
+	color: rgb(147, 153, 159);
+}
+.food .content .cartcontrol-wrapper {
+	position: absolute;
+	right: 24rpx;
+	bottom: 24rpx;
+}
+.food .content .buy {
+	position: absolute;
+	right: 36rpx;
+	bottom: 36rpx;
+	z-index: 10;
+	height: 48rpx;
+	line-height: 48rpx;
+	padding: 0 24rpx;
+	box-sizing: border-box;
+	border-radius: 24rpx;
+	font-size: 20rpx;
+	color: #fff;
+	background-color: rgb(0, 160, 220);
+	opacity: 1;
+}
+
+/* 动画 */
+.food .info {
+	padding: 36rpx;
+}
+.food .info .title {
+	line-height: 28rpx;
+	margin-bottom: 12rpx;
+	font-size: 28rpx;
+	color: rgb(7, 17, 27);
+}
+.food .info .text {
+	line-height: 48rpx;
+	padding: 0 16rpx;
+	font-size: 24rpx;
+	color: rgb(77, 85, 93);
+}
+.food .rating {
+	padding-top: 36rpx;
+	padding-bottom: 36rpx;
+}
+.food .rating .title {
+	line-height: 14rpx;
+	margin-left: 36rpx;
+	font-size: 28rpx;
+	color: rgb(7, 17, 27);
+}
+.food .rating-wrapper {
+	padding: 0 36rpx;
+}
+.food .rating-wrapper .rating-item {
+	position: relative;
+	padding: 32rpx 0;
+}
+.food .rating-wrapper .rating-item::after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	border-top: 2rpx solid rgba(7, 17, 27, 0.1);
+}
+.food .rating-wrapper .rating-item .user {
+	position: absolute;
+	right: 0;
+	top: 32rpx;
+	line-height: 24rpx;
+	font-size: 0;
+}
+.food .rating-wrapper .rating-item .user .name {
+	display: inline-block;
+	margin-right: 12rpx;
+	vertical-align: top;
+	font-size: 20rpx;
+	color: rgb(147, 153, 159);
+}
+.food .rating-wrapper .rating-item .user .avatar {
+	display: inline-block;
+	width: 24rpx;
+	height: 24rpx;
+	border-radius: 50%;
+}
+.food .rating-wrapper .rating-item .time {
+	margin-bottom: 12rpx;
+	line-height: 24rpx;
+	font-size: 20rpx;
+	color: rgb(147, 153, 159);
+}
+.food .rating-wrapper .rating-item .text {
+	line-height: 32rpx;
+	font-size: 24rpx;
+	color: rgb(7, 17, 27);
+}
+.food .rating-wrapper .rating-item .text .icon-thumb_down,
+.icon-thumb_up {
+	margin-right: 8rpx;
+	line-height: 32rpx;
+	font-size: 24rpx;
+}
+.food .rating-wrapper .rating-item .text .icon-thumb_up {
+	color: rgb(0, 160, 220);
+}
+.food .rating-wrapper .rating-item .text .icon-thumb_down {
+	color: rgb(147, 153, 159);
+}
+.food .rating-wrapper .no-rating {
+	padding: 32rpx 0;
+	font-size: 24rpx;
+	color: rgb(147, 153, 159);
+}
+

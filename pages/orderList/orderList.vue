@@ -13,9 +13,9 @@
 						{{item.orderNumber|formatDate}}
 					</view>
 					<view class="goods">
-						<view class="goods-item" v-for="(item,goods) in item.orderItem" :key="goods">
-							<view class="goods-title">{{item.name}}<text class="goods-count">x{{item.count}}</text></view>
-							<view class="price">￥<text class="number">{{item.count*item.price}}</text></view>
+						<view class="goods-item" v-for="(food,goods) in item.orderItem" :key="goods">
+							<view class="goods-title">{{food.name}}<text class="goods-count">x{{food.count}}</text></view>
+							<view class="price">￥<text class="number">{{food.count*food.price}}</text></view>
 						</view>
 						<view class="total">
 							实付<view class="total-price">￥<text class="number">{{item.totalPrice}}</text></view>
@@ -161,5 +161,14 @@
 
 	.goods-item .goods-count {
 		margin-left: 14rpx;
+	}
+	
+	.no-result {
+		width: 100vw;
+		height: 100vh;
+		font-size: 50rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 </style>

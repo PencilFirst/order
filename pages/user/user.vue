@@ -59,6 +59,7 @@
 		},
 		created() {
 			// this.accountInfo = uni.getAccountInfoSync();
+			console.log(uni.getAccountInfoSync())
 		},
 		methods: {
 

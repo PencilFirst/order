@@ -10,12 +10,16 @@
 				<view class="overview-right">
 					<view class="score-wrapper">
 						<text class="title">服务态度</text>
-						<star :size="36" :score="seller.serviceScore"></star>
+						<view class="stars">
+							<star :size="36" :score="seller.serviceScore"></star>
+						</view>
 						<text class="score">{{seller.serviceScore}}</text>
 					</view>
 					<view class="score-wrapper">
 						<text class="title">商品评分</text>
-						<star :size="36" :score="seller.foodScore"></star>
+						<view class="stars">
+							<star :size="36" :score="seller.foodScore"></star>
+						</view>
 						<text class="score">{{seller.foodScore}}</text>
 					</view>
 					<view class="delivery-wrapper">
@@ -25,19 +29,19 @@
 				</view>
 			</view>
 			<split></split>
-			<ratingselect :selectType="selectType" :onlyContent="onlyContent" :ratings="ratings"
-					@select="selectRating" @toggle="toggleContent"
-			></ratingselect>
+			<ratingselect :selectType="selectType" :onlyContent="onlyContent" :ratings="ratings" @select="selectRating" @toggle="toggleContent"></ratingselect>
 			<view class="rating-wrapper">
-				<view class="rating-item" v-for="rating in ratings" v-show="needShow(rating.rateType, rating.text)">
+				<view class="rating-item" v-for="rating in ratings" v-if="needShow(rating.rateType, rating.text)">
 					<view class="avatar">
 						<image :src="rating.avatar" mode="widthFix"></image>
 					</view>
 					<view class="content">
 						<text class="name">{{rating.username}}</text>
 						<view class="star-wrapper">
-							<star :size="24" :score="rating.score"></star>
-							<text class="delivery" v-show="rating.deliveryTime">{{rating.deliveryTime}}分钟送达</text>
+							<view class="stars">
+								<star :size="24" :score="rating.score"></star>
+							</view>
+							<text class="delivery" v-if="rating.deliveryTime">{{rating.deliveryTime}}分钟送达</text>
 						</view>
 						<text class="text">{{rating.text}}</text>
 						<view class="recommend" v-show="rating.recommend && rating.recommend.length">
@@ -83,9 +87,18 @@
 		},
 		methods: {
 			async getRatingsInfo() {
+				// #ifdef H5	
 				const res = await this.$http({
 					url: '/api/ratings'
 				})
+				// #endif
+
+				// #ifndef H5
+				const res = await this.$http({
+					url: '/ratings'
+				})
+				// #endif
+
 				this.ratings = res.data.data
 				console.log(res.data.data)
 			},
@@ -100,10 +113,10 @@
 				}
 			},
 			selectRating(type) {
-			  this.selectType = type;
+				this.selectType = type;
 			},
 			toggleContent() {
-			  this.onlyContent = !this.onlyContent;
+				this.onlyContent = !this.onlyContent;
 			}
 		},
 		filters: {
@@ -189,6 +202,8 @@
 	.ratings .overview .overview-right .score-wrapper {
 		margin-bottom: 16rpx;
 		font-size: 0;
+		/* 	width: 100%;
+		display: inline-block; */
 	}
 
 	.ratings .overview .overview-right .score-wrapper .title {
@@ -199,10 +214,11 @@
 		color: rgb(7, 17, 27);
 	}
 
-	.ratings .overview .overview-right .score-wrapper .star {
+	.ratings .overview .overview-right .score-wrapper .stars {
 		display: inline-block;
 		vertical-align: top;
 		margin: 0 24rpx;
+		width: 50%;
 	}
 
 	.ratings .overview .overview-right .score-wrapper .score {
@@ -278,10 +294,11 @@
 		font-size: 0;
 	}
 
-	.ratings .rating-wrapper .rating-item .content .star-wrapper .star {
+	.ratings .rating-wrapper .rating-item .content .star-wrapper .stars {
 		display: inline-block;
 		margin-right: 12rpx;
 		vertical-align: top;
+		width: 130rpx;
 	}
 
 	.ratings .rating-wrapper .rating-item .content .star-wrapper .delivery {

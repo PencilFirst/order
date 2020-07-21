@@ -13,7 +13,7 @@
 					{{seller.description}}/{{seller.deliveryTime}}分钟送达
 				</view>
 				<view class="support" v-if="seller.supports">
-					<text class="icon" :class="classMap[seller.supports[0].type]"></text>
+					<text class="icon" :class="'icon0'"></text>
 					<text class="text">{{seller.supports[0].description}}</text>
 				</view>
 			</view>
@@ -47,7 +47,7 @@
 						</view>
 						<view class="supports" v-if="seller.supports">
 							<view class="support-item" v-for="(item,index) in seller.supports" :key="index">
-								<text class="icon" :class="classMap[seller.supports[index].type]"></text>
+								<text class="icon" v-bind:class="'icon'+index"></text>
 								<text class="text">{{seller.supports[index].description}}</text>
 							</view>
 						</view>
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-	import star from'../star/star.vue'
+	import star from '../star/star.vue'
 	export default {
 		name: "myHeader",
 		props: {
@@ -117,10 +117,13 @@
 
 			}
 		},
+		computed: {
+
+		},
 		onUnload() {
 			this.animationData = {}
 		},
-		components:{
+		components: {
 			star
 		}
 	}
@@ -198,23 +201,23 @@
 		background-repeat: no-repeat;
 	}
 
-	.header .content-wrapper .content .support .icon.decrease {
+	.header .content-wrapper .content .support .icon.icon0 {
 		background-image: url(../../static/images/decrease_2@3x.png);
 	}
 
-	.header .content-wrapper .content .support .icon.discount {
+	.header .content-wrapper .content .support .icon.icon1 {
 		background-image: url(../../static/images/discount_2@3x.png);
 	}
 
-	.header .content-wrapper .content .support .icon.guarantee {
+	.header .content-wrapper .content .support .icon.icon2 {
 		background-image: url(../../static/images/guarantee_2@3x.png);
 	}
 
-	.header .content-wrapper .content .support .icon.invoice {
+	.header .content-wrapper .content .support .icon.icon3 {
 		background-image: url(../../static/images/invoice_2@3x.png);
 	}
 
-	.header .content-wrapper .content .support .icon.special {
+	.header .content-wrapper .content .support .icon.icon4 {
 		background-image: url(../../static/images/special_2@3x.png);
 	}
 
@@ -326,7 +329,9 @@
 
 	.header .detail .detail-wrapper {
 		width: 100%;
-		min-height: calc(100%-88rpx);
+		/* min-height: calc(100%-88rpx); */
+		min-height: calc(100%-100rpx);
+		/* min-height: 100%; */
 	}
 
 	.header .detail .detail-wrapper .detail-main {
@@ -392,23 +397,23 @@
 		background-repeat: no-repeat;
 	}
 
-	.header .detail .detail-wrapper .detail-main .supports .support-item .icon.decrease {
+	.header .detail .detail-wrapper .detail-main .supports .support-item .icon.icon0 {
 		background-image: url(../../static/images/decrease_2@3x.png);
 	}
 
-	.header .detail .detail-wrapper .detail-main .supports .support-item .icon.discount {
+	.header .detail .detail-wrapper .detail-main .supports .support-item .icon.icon1 {
 		background-image: url(../../static/images/discount_2@3x.png);
 	}
 
-	.header .detail .detail-wrapper .detail-main .supports .support-item .icon.guarantee {
+	.header .detail .detail-wrapper .detail-main .supports .support-item .icon.icon2 {
 		background-image: url(../../static/images/guarantee_2@3x.png);
 	}
 
-	.header .detail .detail-wrapper .detail-main .supports .support-item .icon.invoice {
+	.header .detail .detail-wrapper .detail-main .supports .support-item .icon.icon3 {
 		background-image: url(../../static/images/invoice_2@3x.png);
 	}
 
-	.header .detail .detail-wrapper .detail-main .supports .support-item .icon.special {
+	.header .detail .detail-wrapper .detail-main .supports .support-item .icon.icon4 {
 		background-image: url(../../static/images/special_2@3x.png);
 	}
 
@@ -432,7 +437,8 @@
 		position: relative;
 		width: 64rpx;
 		height: 64rpx;
-		margin: -64rpx auto 0 auto;
+		/* margin: -64rpx auto 0 auto; */
+		margin: -128rpx auto 0 auto;
 		clear: both;
 		font-size: 64rpx;
 	}
