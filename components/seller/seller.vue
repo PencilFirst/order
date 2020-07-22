@@ -71,10 +71,20 @@
 </template>
 
 <script>
+	// #ifdef H5
 	import {
 		saveToLocal,
 		loadFromLocal
 	} from '../../util/store.js'
+	// #endif
+	
+	// #ifndef H5
+	import {
+		saveToLocal,
+		loadFromLocal
+	} from '../../util/miniStore.js'
+	// #endif
+
 	import split from '../split/split.vue'
 	import star from '../star/star.vue'
 	export default {
@@ -101,13 +111,14 @@
 		methods: {
 			toggleFavorite() {
 				this.favorite = !this.favorite;
+				// console.log(this.seller)
 				saveToLocal(this.seller.id, 'favorite', this.favorite);
 			},
-			preview(cur){
+			preview(cur) {
 				uni.previewImage({
-					current:cur,
-					urls:this.seller.pics,
-					indicator:'default',
+					current: cur,
+					urls: this.seller.pics,
+					indicator: 'default',
 				})
 				// console.log(cur)
 			}

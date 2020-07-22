@@ -91,16 +91,18 @@
 				const res = await this.$http({
 					url: '/api/ratings'
 				})
+				this.ratings = res.data.data
 				// #endif
 
 				// #ifndef H5
-				const res = await this.$http({
-					url: '/ratings'
-				})
+				// const res = await this.$http({
+				// 	url: '/ratings'
+				// })
+				const appData = require('../../util/data.json')
+				this.ratings = appData.ratings
 				// #endif
 
-				this.ratings = res.data.data
-				console.log(res.data.data)
+				// console.log(res.data.data)
 			},
 			needShow(type, text) {
 				if (this.onlyContent && !text) {

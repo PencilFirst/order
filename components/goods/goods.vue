@@ -122,15 +122,18 @@
 				const res = await this.$http({
 					url: '/api/goods'
 				})
+				this.getGoods(res.data.data)
 				//#endif
 				//#ifndef H5
-				const res = await this.$http({
-					url: '/goods'
-				})
+				// const res = await this.$http({
+				// 	url: '/goods'
+				// })
+				const appData = require('../../util/data.json')
+				this.getGoods(appData.goods)
 				//#endif
 				// console.log(res)
 				// this.goods = res.data.data
-				this.getGoods(res.data.data)
+				
 				// console.log(this.goods)	
 				const _this = this
 				this.$nextTick(() => {

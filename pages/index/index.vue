@@ -40,14 +40,18 @@
 				const res = await this.$http({
 					url: '/api/seller'
 				})
+				this.seller = res.data.data
 				// #endif
 				// #ifndef H5
-					const res = await this.$http({
-						url: '/seller'
-					})
+				// const res = await this.$http({
+				// 	url: '/seller'
+				// })
+				const appData = require('../../util/data.json')
+				// console.log(appData)
+				this.seller = appData.seller
+				// console.log('11')
 				// #endif
 				// console.log(res.data.data)
-				this.seller = res.data.data
 			},
 			onClickItem(e) {
 				if (this.current !== e.currentIndex) {
